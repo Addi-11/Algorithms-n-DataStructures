@@ -12,12 +12,9 @@ void countSort( int arr[], int n){
     memset(count, 0, sizeof(count));
 
     //count the repitition of an element in array
-    for(int i = 0; i < Range; i++){
-        for(int j = 0; j < n; j++){
-            if( i == arr[j])
-               count[i]++;
-        }
-    }
+
+    for(int i = 0; arr[i]; ++i) 
+        ++count[arr[i]];
 
     //sumation of no. of repititions
 
@@ -27,13 +24,11 @@ void countSort( int arr[], int n){
 
     //output each array element at one less position specified by the count
 
-    for(int i = 0; i < Range; i++){
-        for(int j = 0; j < n; j++){
-            if(arr[j] == i){
-                output[count[i]-1] = arr[j];
-                count[i] = (count[i]-1);
-            }
-        }
+
+    for (int i = 0; arr[i]; ++i) 
+    { 
+        output[count[arr[i]]-1] = arr[i]; 
+        --count[arr[i]]; 
     }
 
     print(output,n);
@@ -54,6 +49,6 @@ int main(){
     int n = sizeof(arr)/sizeof(arr[0]);
     
     countSort(arr, n);
-    //print(arr, n);
+    print(arr, n);
     return 0;
 }
