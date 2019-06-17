@@ -51,20 +51,47 @@ int findMin(struct Node* root){
    return root->data;
 }
 
+int findHeight(struct Node* root){
+    int lheight = 1;
+    int rheight = 1;
+    struct Node* lroot = root;
+    struct Node* rroot = root;
+    if(root == NULL){
+        return -1;
+    }
+    while(rroot->rchild != NULL){
+        rroot = rroot->rchild;
+        rheight++;
+    }
+    while(lroot->lchild != NULL){
+        lroot = lroot->lchild;
+        lheight++;
+    }
+    printf("left height: %d, right height: %d\n",lheight,rheight);
+    //height = max(lheight,rheight)
+    if(lheight > rheight)
+        return lheight;
+    else
+        return rheight;
+}
+
 int main(){
     struct Node* root = NULL;
-    int a = findMax(root);
+    int f = findHeight(root);
     root = insertNode(root,15);	
 	root = insertNode(root,10);	
 	root = insertNode(root,20);
 	root = insertNode(root,25);
 	root = insertNode(root,8);
 	root = insertNode(root,12);
-	root = insertNode(root,56);
+    root = insertNode(root,58);
+	root = insertNode(root,59);
 
     int max = findMax(root);
     int min = findMin(root);
+    int h = findHeight(root);
     printf("%d is the maximum element of the tree\n",max);
     printf("%d is the minimum element of the tree\n",min);
+    printf("%d is the hieght of tree\n",f);
     return 0;
 }
