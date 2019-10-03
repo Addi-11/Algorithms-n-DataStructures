@@ -43,6 +43,29 @@ int lcs(char *s1, char *s2, int m, int n){
     return L[m][n];
 }
 
+// MEMOISED FORM
+const int maximum = 1000;
+
+int LCS(char *s1, char *s2, int m, int n, int l[][maximum]){
+    
+    
+    if(m == 0 || n == 0){
+        return 0;
+        }
+    if(l[m-1][n-1] != -1){
+        return l[m-1][n-1];
+    }
+    if(s1[m-1] == s2[n-1]){
+        l[m-1][n-1] = 1 + LCS(s1,s2,m-1,n-1, l);
+        return l[m-1][n-1];
+    }
+    else
+    {
+        l[m-1][n-1] = max(LCS(s1,s2,m-1,n, l),LCS(s1,s2,m,n-1,l));
+        return l[m-1][n-1];
+    }
+    
+}
 
 int main(){
     char *s1, *s2;
@@ -50,6 +73,13 @@ int main(){
     s2 = "gxthjas";
     int m = strlen(s1);
     int n = strlen(s2);
+
+    int l[m][maximum];
+    memset(l,-1,sizeof(l));
+    
+    // tabulated output
     std::cout << lcs(s1, s2, m, n);
+    // memoized output
+    std::cout << LCS(s1, s2, m, n, l);
     return 0;
 }
